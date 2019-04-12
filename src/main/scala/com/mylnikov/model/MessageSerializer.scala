@@ -5,6 +5,9 @@ import java.util
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.kafka.common.serialization.Serializer
 
+/**
+  * Kafka serializer for message. Null safe.
+  */
 class MessageSerializer extends Serializer[Message] {
 
   val mapper= new ObjectMapper()

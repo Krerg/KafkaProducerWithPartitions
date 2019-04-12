@@ -6,6 +6,9 @@ import com.mylnikov.model.Message
 import scala.concurrent.forkjoin.ThreadLocalRandom
 import scala.util.Random
 
+/**
+  * Self-generated message producer. Using scala random returns new message
+  */
 class GeneratedMessageProducer extends MessageProducer {
 
   val users = Array[String]("Alex", "So", "Johnatan", "Lex")

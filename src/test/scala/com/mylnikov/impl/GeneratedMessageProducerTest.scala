@@ -8,7 +8,7 @@ class GeneratedMessageProducerTest extends FunSuite {
 
     test("should generate proper message") {
       val message = kafkaMessageProducer.getNextMessage
-      assert(!message.message.isEmpty)
+      assert(!message.getText.isEmpty)
       assert(!message.userName.isEmpty)
       assert(!message.location.isEmpty)
       assert(kafkaMessageProducer.locations.exists(message.location.contains))

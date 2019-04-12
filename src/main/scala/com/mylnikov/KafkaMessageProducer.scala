@@ -6,10 +6,20 @@ import com.mylnikov.impl.GeneratedMessageProducer
 import com.mylnikov.model.Message
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
+/**
+  * Entry point. Produces some messages to kafka distributed bu message's username.
+  */
 object KafkaMessageProducer {
 
+  /**
+    * Big data words to filter message with big data.
+    */
   val searchWords = Array("big data", "ai",  "machine learning" , "course")
 
+  /**
+    *
+    * @param args bootstrap server and kafka topic
+    */
   def main(args: Array[String]): Unit = {
 
     if (args.length < 2) {
@@ -38,12 +48,20 @@ object KafkaMessageProducer {
 
   }
 
+  /**
+    * @param name message's name
+    * @return partition number for this user. Uses length modulo.
+    */
   def getPartitionNumberByUsername(name: String): Integer = {
     name.length % 4
   }
 
+  /**
+    * @param message input message
+    * @return true is text cintains big data words, otherwise false.
+    */
   def containsBigData(message: Message): Boolean = {
-    searchWords.exists(message.message.contains)
+    searchWords.exists(message.text.contains)
   }
 
 }
