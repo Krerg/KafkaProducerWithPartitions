@@ -6,4 +6,8 @@ case class Message(@BeanProperty userName: String = null,
                    @BeanProperty location: String = null,
                    @BeanProperty message: String = null) {
 
+  def this() {
+    this("","","")
+  }
+
 }

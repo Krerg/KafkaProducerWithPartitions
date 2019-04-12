@@ -2,6 +2,8 @@ group 'com.mylnikov'
 version '1.0'
 
 def scalaVersion = '2.11.12'
+def scalaCompatVersion = '2.11'
+def sparkVersion = '2.3.0'
 
 repositories {
     mavenCentral()
@@ -33,5 +35,8 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     compile 'org.slf4j:slf4j-api:1.7.5'
     compile 'org.slf4j:slf4j-log4j12:1.7.5'
+    testCompile group: 'org.apache.spark', name: "spark-hive_$scalaCompatVersion", version: "$sparkVersion"
+    testCompile group: 'com.holdenkarau', name: 'spark-testing-base_2.11', version: '2.3.0_0.9.0'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 
 }
