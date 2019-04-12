@@ -17,13 +17,21 @@ object KafkaMessageProducer {
   val searchWords = Array("big data", "ai",  "machine learning" , "course")
 
   /**
-    *
-    * @param args bootstrap server and kafka topic
+    * Countru name to filter messages
+    */
+  var currentCountry = "Russia"
+
+  /**
+    * @param args bootstrap server and kafka topic, third argument could be current country
     */
   def main(args: Array[String]): Unit = {
 
     if (args.length < 2) {
       throw new IllegalArgumentException("You should specify bootstrap server and topic in arguments in arguments")
+    }
+
+    if (args.length == 3 ) {
+      currentCountry = args(2)
     }
 
     // Kafka config
@@ -38,7 +46,7 @@ object KafkaMessageProducer {
 
     while(true) {
       val message = messageProducer.getNextMessage
-      if (containsBigData(message)) {
+      if (containsBigData(message) && isInRussian(message)) {
         producer.send(new ProducerRecord[String, Message](args(1),
           getPartitionNumberByUsername(message.userName),
           "key",
@@ -46,6 +54,10 @@ object KafkaMessageProducer {
       }
     }
 
+  }
+
+  def isInRussian(message: Message): Boolean = {
+    currentCountry.equals(message.location)
   }
 
   /**
