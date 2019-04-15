@@ -1,5 +1,6 @@
 package com.mylnikov.impl
 
+import com.mylnikov.KafkaMessageProducer
 import org.scalatest.FunSuite
 
 class GeneratedMessageProducerTest extends FunSuite {
@@ -12,7 +13,7 @@ class GeneratedMessageProducerTest extends FunSuite {
       assert(!message.userName.isEmpty)
       assert(!message.location.isEmpty)
       assert(kafkaMessageProducer.locations.exists(message.location.contains))
-      assert(kafkaMessageProducer.users.exists(message.userName.contains))
+      assert(KafkaMessageProducer.users.exists(message.userName.contains))
     }
 
 }

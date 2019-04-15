@@ -17,6 +17,11 @@ object KafkaMessageProducer {
   val searchWords = Array("big data", "ai",  "machine learning" , "course")
 
   /**
+    * Static usernames.
+    */
+  val users = Array[String]("Alex", "So", "Johnatan", "Lex")
+
+  /**
     * Countru name to filter messages
     */
   var currentCountry = "Russia"
@@ -65,7 +70,7 @@ object KafkaMessageProducer {
     * @return partition number for this user. Uses length modulo.
     */
   def getPartitionNumberByUsername(name: String): Integer = {
-    name.length % 4
+    users.indexOf(name) + 1
   }
 
   /**

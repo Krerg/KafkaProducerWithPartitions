@@ -8,8 +8,8 @@ class KafkaMessageProducerTest extends FunSuite {
   val kafkaMessageProducer = KafkaMessageProducer
 
   test("Should get partition number by username") {
-    val partitionNumber = kafkaMessageProducer.getPartitionNumberByUsername("sd");
-    assert(partitionNumber == 2)
+    val partitionNumber = kafkaMessageProducer.getPartitionNumberByUsername("Lex");
+    assert(partitionNumber == 4)
   }
 
   test("Should filter messages without big data words") {
