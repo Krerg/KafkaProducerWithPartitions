@@ -13,8 +13,9 @@ class KafkaMessageProducerTest extends FunSuite {
   }
 
   test("Should filter messages without big data words") {
-    assert(!kafkaMessageProducer.containsBigData(new Message(getText = "someMessage")))
-    assert(kafkaMessageProducer.containsBigData(new Message(getText = "big data message")))
+    assert(!kafkaMessageProducer.containsBigData(new Message(text = "someMessage")))
+    assert(kafkaMessageProducer.containsBigData(new Message(text = "big data message")))
+    assert(!kafkaMessageProducer.containsBigData(new Message(text = "the air is fresh")))
   }
 
 }

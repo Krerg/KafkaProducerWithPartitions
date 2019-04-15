@@ -17,9 +17,10 @@ class MessageSerializer extends Serializer[Message] {
   }
 
   override def serialize(topic: String, data: Message): Array[Byte] = {
-    try mapper.writeValueAsString(data).getBytes match {
-      case bytes: Array[Byte] => bytes
-      case ex => Array.emptyByteArray
+    try {
+      mapper.writeValueAsString(data).getBytes
+    } catch {
+      case ex: Exception => Array.emptyByteArray
     }
   }
 

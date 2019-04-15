@@ -57,7 +57,7 @@ object KafkaMessageProducer {
   }
 
   def isInRussian(message: Message): Boolean = {
-    currentCountry.equals(message.location)
+    currentCountry == message.location
   }
 
   /**
@@ -70,10 +70,35 @@ object KafkaMessageProducer {
 
   /**
     * @param message input message
-    * @return true is text cintains big data words, otherwise false.
+    * @return true is text contains big data words, otherwise false.
     */
   def containsBigData(message: Message): Boolean = {
-    searchWords.exists(message.text.contains)
+    for(word <- searchWords) {
+      val indexOfWord = message.text.indexOf(word)
+      if(indexOfWord >= 0) {
+        val beforeCharIndex = indexOfWord-1
+        val afterCharIndex = indexOfWord+word.length
+        if(!isCharIsLetter(message.text, beforeCharIndex) && !isCharIsLetter(message.text, afterCharIndex)) {
+          return true
+        }
+      }
+    }
+    false
+  }
+
+  /**
+    * @param word input word
+    * @param index index of character to check
+    * @return true if index of character is a letter, otherwise false
+    */
+  def isCharIsLetter(word: String, index: Int) : Boolean = {
+    if(index < 0) {
+      return false
+    }
+    if(index > (word.length - 1)) {
+      return false
+    }
+    word.charAt(index).isLetter
   }
 
 }

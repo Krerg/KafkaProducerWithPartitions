@@ -1,6 +1,6 @@
 package com.mylnikov.impl
 
-import org.scalatest.{FunSuite}
+import org.scalatest.FunSuite
 
 class GeneratedMessageProducerTest extends FunSuite {
 
