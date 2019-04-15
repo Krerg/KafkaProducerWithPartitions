@@ -51,7 +51,7 @@ object KafkaMessageProducer {
 
     while(true) {
       val message = messageProducer.getNextMessage
-      if (containsBigData(message) && isInRussian(message)) {
+      if (containsBigData(message) && isInCurrentCountry(message)) {
         producer.send(new ProducerRecord[String, Message](args(1),
           getPartitionNumberByUsername(message.userName),
           "key",
@@ -61,7 +61,7 @@ object KafkaMessageProducer {
 
   }
 
-  def isInRussian(message: Message): Boolean = {
+  def isInCurrentCountry(message: Message): Boolean = {
     currentCountry == message.location
   }
 
